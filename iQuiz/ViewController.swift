@@ -17,7 +17,10 @@ class ViewController: UIViewController, UITableViewDelegate {
 //        "Science"
 //    ])
     
+    var indexPick : Int = 0
+    
     class StringTableData: NSObject, UITableViewDataSource {
+        
         
         let data : [String] = [
             "Mathematics",
@@ -38,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return data.count
         }
+        
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell")!
@@ -64,6 +68,36 @@ class ViewController: UIViewController, UITableViewDelegate {
         }))
         self.present(alert, animated: true)
     }
+    
+//    func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
+//        NSLog("You selected cell \(indexPath.row)")
+//    }
+    
+    func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
+        if indexPath.row == 0 {
+               performSegue(withIdentifier: "FirstViewController", sender: nil)
+            }
+    }
+    
+//    func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Question1ViewController") as? Question1ViewController {
+//            
+//            self.navigationController?.pushViewController(vc, animated: true)
+//            
+//        }
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ViewHistory" {
+            let controller = segue.destination as? Question1ViewController
+            controller?.indexPick = indexPick
+            print("Preparing for segue - indexPick: \(indexPick)")
+
+            
+            
+        }
+    }
+       
                                                 
 
 }
