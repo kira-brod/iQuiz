@@ -74,9 +74,17 @@ class ViewController: UIViewController, UITableViewDelegate {
 //    }
     
     func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
+        NSLog("hello")
         if indexPath.row == 0 {
-               performSegue(withIdentifier: "FirstViewController", sender: nil)
-            }
+            indexPick = 0
+            performSegue(withIdentifier: "FirstViewController", sender: nil)
+        } else if indexPath.row == 1 {
+            indexPick = 1
+            performSegue(withIdentifier: "FirstViewController", sender: nil)
+        } else {
+            indexPick = 2
+            performSegue(withIdentifier: "FirstViewController", sender: nil)
+        }
     }
     
 //    func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
@@ -88,7 +96,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ViewHistory" {
+        if segue.identifier == "FirstViewController" {
             let controller = segue.destination as? Question1ViewController
             controller?.indexPick = indexPick
             print("Preparing for segue - indexPick: \(indexPick)")

@@ -1,19 +1,19 @@
 //
-//  Question2ViewController.swift
+//  ActualQuestion2AnswerViewController.swift
 //  iQuiz
 //
-//  Created by Kira Brodsky on 5/3/25.
+//  Created by Kira Brodsky on 5/11/25.
 //
 
 import UIKit
 
-class Question2ViewController: UIViewController, UITableViewDelegate {
-    
+class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate {
+
     var quiz = Quiz()
     var repository = QuizRepository()
     var correct = false
     var indexPick : Int = 0
-    var score = 0
+    var score : Int = 0
     
     @IBOutlet weak var tblTable: UITableView!
     
@@ -45,22 +45,15 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
             return 3
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if indexPath.row == quiz1.correct1Index {
+            if indexPath.row == quiz1.correct2Index {
                 quiz1.score += 1
             }
         }
         
-    
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, selectionStyle: UITableViewCell.SelectionStyle) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Question")!
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "answer")!
             let division = (Array(data.keys))[indexPath.section]
             let team = data[division]?[indexPath.row]
-            
-            if indexPath.row == quiz1.correct1Index {
-                cell.isSelected = true
-            }
-                
             cell.textLabel?.text = team
             return cell
         }
@@ -68,7 +61,6 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     
 //    let quiz1 = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
     var stringTableData1 = DataTable(["hello" : ["efw", "wewe"]])
-    
     
     
     
@@ -85,7 +77,9 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
         
 //        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
         
-        stringTableData1 = DataTable(repository.quizzes[indexPick].question1, quiz: repository.quizzes[indexPick])
+        stringTableData1 = DataTable(repository.quizzes[indexPick].question2, quiz: repository.quizzes[indexPick])
+        
+        score = repository.quizzes[indexPick].score
         
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
@@ -100,16 +94,20 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
 //            quiz1.score += 1
 //            NSLog("score: \(quiz1.score)")
 //        }
+        
+        NSLog("\(score)")
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "nextQuestion" {
-            let controller = segue.destination as? ActualQuestion2ViewController
+        if segue.identifier == "finish" {
+            let controller = segue.destination as? FinishedViewController
             controller?.quiz = quiz
-            controller?.repository = repository
-//            controller?.correct = quiz.correct
-            controller?.indexPick = indexPick
             controller?.score = score
+            controller?.repository = repository
+            controller?.correct = quiz.correct
+            controller?.indexPick = indexPick
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             
@@ -117,15 +115,15 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "FirstViewAnswer" {
-//            let controller = segue.destination as? Question2ViewController
-//            controller?.quiz = quiz
-//            print("Preparing for segue - indexPick: \(quiz)")
-//
-//            
-//            
-//        }
-//    }
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

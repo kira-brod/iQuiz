@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D555064F2DD162F100A0EAF2 /* ActualQuestion2AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555064E2DD162F100A0EAF2 /* ActualQuestion2AnswerViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D58700592DC17EC60062277B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D555064E2DD162F100A0EAF2 /* ActualQuestion2AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActualQuestion2AnswerViewController.swift; sourceTree = "<group>"; };
 		D58700422DC17EC40062277B /* iQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58700582DC17EC60062277B /* iQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D58700622DC17EC60062277B /* iQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +93,7 @@
 		D58700392DC17EC40062277B = {
 			isa = PBXGroup;
 			children = (
+				D555064E2DD162F100A0EAF2 /* ActualQuestion2AnswerViewController.swift */,
 				D58700442DC17EC40062277B /* iQuiz */,
 				D587005B2DC17EC60062277B /* iQuizTests */,
 				D58700652DC17EC60062277B /* iQuizUITests */,
@@ -249,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D555064F2DD162F100A0EAF2 /* ActualQuestion2AnswerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
