@@ -24,12 +24,12 @@ class FinishedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scoreLabel.text = "\(score)"
+        scoreLabel.text = "\(score) out of 2"
         
         if score == 1 {
             des.text = "Almost"
         } else if score == 2 {
-            des.text = "You did it!"
+            des.text = "Perfect!"
         } else {
             des.text = "Not quite"
         }
@@ -46,5 +46,6 @@ class FinishedViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }

@@ -21,6 +21,7 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     
     
     class DataTable : NSObject, UITableViewDataSource {
+        
         var data : [String: [String]] = [:]
         var quiz1 : Quiz = Quiz()
         
@@ -50,20 +51,18 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
             }
         }
         
-    
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, selectionStyle: UITableViewCell.SelectionStyle) -> UITableViewCell {
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Question")!
             let division = (Array(data.keys))[indexPath.section]
             let team = data[division]?[indexPath.row]
             
             if indexPath.row == quiz1.correct1Index {
-                cell.isSelected = true
+                cell.backgroundColor = UIColor(red: 0.4, green: 0.2, blue: 0.9, alpha: 0.2)
             }
-                
             cell.textLabel?.text = team
             return cell
         }
+
     }
     
 //    let quiz1 = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)

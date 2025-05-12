@@ -55,6 +55,11 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
             let division = (Array(data.keys))[indexPath.section]
             let team = data[division]?[indexPath.row]
             cell.textLabel?.text = team
+            
+            if indexPath.row == quiz1.correct2Index {
+                cell.backgroundColor = UIColor(red: 0.4, green: 0.2, blue: 0.9, alpha: 0.2)
+            }
+            
             return cell
         }
     }
@@ -78,9 +83,7 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
 //        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
         
         stringTableData1 = DataTable(repository.quizzes[indexPick].question2, quiz: repository.quizzes[indexPick])
-        
-        score = repository.quizzes[indexPick].score
-        
+                
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
 

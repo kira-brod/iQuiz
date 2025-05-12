@@ -87,7 +87,7 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AnswerQ2" {
+        if segue.identifier == "ans" {
             let controller = segue.destination as? ActualQuestion2AnswerViewController
             controller?.quiz = quiz
             controller?.repository = repository
