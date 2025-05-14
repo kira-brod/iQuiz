@@ -15,10 +15,14 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     var indexPick : Int = 0
     var score = 0
     
+    
+    @IBOutlet weak var check: UIButton!
+    
     @IBOutlet weak var tblTable: UITableView!
     
     @IBOutlet weak var CheckAnswer: UILabel!
     
+    @IBOutlet weak var finish: UIButton!
     
     class DataTable : NSObject, UITableViewDataSource {
         
@@ -43,7 +47,7 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
             return (Array(data.keys))[section]
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 3
+            return 4
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row == quiz1.correct1Index {
@@ -68,27 +72,32 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
 //    let quiz1 = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
     var stringTableData1 = DataTable(["hello" : ["efw", "wewe"]])
     
-    
+    var data: [Question1] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let data1 = DataLoader().quizzes[indexPick].questions
+
+        
         if correct {
             CheckAnswer.text = "Correct!"
         }
         
+        finish.isHidden = true
         
-//        tblTable.dataSource = stringTableData
-//        tblTable.delegate = self
+        if data1.count == 1 {
+            finish.isHidden = false
+            check.isEnabled = false
+        }
         
-//        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
+
         
         stringTableData1 = DataTable(repository.quizzes[indexPick].question1, quiz: repository.quizzes[indexPick])
         
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
-
         // Do any additional setup after loading the view.
     }
     
@@ -102,18 +111,21 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "nextQuestion" {
-            let controller = segue.destination as? ActualQuestion2ViewController
-            controller?.quiz = quiz
-            controller?.repository = repository
-//            controller?.correct = quiz.correct
-            controller?.indexPick = indexPick
-            controller?.score = score
-            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+        
+        
+            if segue.identifier == "nextQuestion" {
+                let controller = segue.destination as? ActualQuestion2ViewController
+                controller?.quiz = quiz
+                controller?.repository = repository
+                //            controller?.correct = quiz.correct
+                controller?.indexPick = indexPick
+                controller?.score = score
+                print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
+            }
 
             
             
-        }
+        
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

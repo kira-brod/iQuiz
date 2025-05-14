@@ -1,13 +1,13 @@
 //
-//  ActualQuestion2ViewController.swift
+//  ThirdQuestionViewController.swift
 //  iQuiz
 //
-//  Created by Kira Brodsky on 5/11/25.
+//  Created by Kira Brodsky on 5/14/25.
 //
 
 import UIKit
 
-class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
+class ThirdQuestionViewController: UIViewController, UITableViewDelegate{
 
     @IBOutlet weak var tblTable: UITableView!
     var repository : QuizRepository = QuizRepository()
@@ -44,14 +44,14 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
             print(indexPath.row)
             print(quiz1.correct1Index)
             NSLog("hiii")
-            if indexPath.row == quiz1.correct2Index {
+            if indexPath.row == quiz1.correct3Index {
                 quiz1.score += 1
                 quiz1.correct = true
             }
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "two")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "question")!
             let division = (Array(data.keys))[indexPath.section]
             let team = data[division]?[indexPath.row]
             cell.textLabel?.text = team
@@ -67,7 +67,7 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        stringTableData1 = DataTable(repository.quizzes[indexPick].question2, quiz: repository.quizzes[indexPick])
+        stringTableData1 = DataTable(repository.quizzes[indexPick].question3, quiz: repository.quizzes[indexPick])
         
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
@@ -76,7 +76,7 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("User selected \(indexPath)")
         
-        if indexPath.row == repository.quizzes[indexPick].correct2Index  {
+        if indexPath.row == repository.quizzes[indexPick].correct3Index  {
             quiz.score += 1
             NSLog("score: \(quiz.score)")
             quiz.correct = true
@@ -88,7 +88,7 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ans" {
-            let controller = segue.destination as? ActualQuestion2AnswerViewController
+            let controller = segue.destination as? ThirdAnswerViewController
             controller?.quiz = quiz
             controller?.repository = repository
             controller?.correct = quiz.correct
@@ -100,6 +100,18 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
             
         }
     }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
     
 
     /*

@@ -42,7 +42,7 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
             return (Array(data.keys))[section]
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 3
+            return 4
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row == quiz1.correct2Index {
@@ -104,19 +104,31 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "finish" {
-            let controller = segue.destination as? FinishedViewController
+//        if segue.identifier == "finish" {
+//            let controller = segue.destination as? FinishedViewController
+//            controller?.quiz = quiz
+//            controller?.score = score
+//            controller?.repository = repository
+//            controller?.correct = quiz.correct
+//            controller?.indexPick = indexPick
+//            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+//
+//            
+//            
+//        }
+        
+        if segue.identifier == "next" {
+            let controller = segue.destination as? ThirdQuestionViewController
             controller?.quiz = quiz
-            controller?.score = score
             controller?.repository = repository
-            controller?.correct = quiz.correct
+            //            controller?.correct = quiz.correct
             controller?.indexPick = indexPick
-            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
-
-            
-            
+            controller?.score = score
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
         }
     }
+    
+    
     
 
     /*

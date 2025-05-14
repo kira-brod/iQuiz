@@ -77,7 +77,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
             return (Array(data.keys))[section]
         }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 3
+            return 4
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             print(indexPath.row)

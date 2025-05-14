@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var tblTable: UITableView!
@@ -18,11 +19,15 @@ class ViewController: UIViewController, UITableViewDelegate {
 //    ])
     
     var indexPick : Int = 0
+    var repository = QuizRepository()
+    
     
     class StringTableData: NSObject, UITableViewDataSource {
         
+        
+        
     
-        let data : [String] = [
+        let data1 : [String] = [
             "Mathematics",
             "Marvel Super Heroes",
             "Science"
@@ -39,13 +44,13 @@ class ViewController: UIViewController, UITableViewDelegate {
 //        }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return data.count
+            return data1.count
         }
         
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell")!
-            cell.textLabel?.text = data[indexPath.row]
+            cell.textLabel?.text = data1[indexPath.row]
             cell.detailTextLabel?.text = subtitles[indexPath.row]
             return cell
         }
@@ -53,15 +58,65 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     let stringTableData = StringTableData()
     
+    class DataTable : NSObject, UITableViewDataSource {
+        
+        var data : [String: String] = [:]
+        var quiz1 : Quiz = Quiz()
+        
+        
+        
+        init(_ items : [String : String], quiz q : Quiz) {
+            data = items
+            quiz1 = q
+            
+        }
+        
+        init(_ items : [String : String]) {
+            data = items
+            
+        }
+        
+        
+        
+//        func numberOfSections(in tableView: UITableView) -> Int {
+//            return data.keys.count
+//        }
+//        func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//            return (Array(data.keys))[section]
+//        }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 3
+        }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if indexPath.row == quiz1.correct1Index {
+                quiz1.score += 1
+            }
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell")!
+            cell.textLabel?.text = (Array(data.keys))[indexPath.row]
+            cell.detailTextLabel?.text = (Array(data.values))[indexPath.row]
+            return cell
+        }
+
+    }
+    
+    var stringTableData1 = DataTable(["hello" : "bye"])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        tblTable.dataSource = stringTableData
-        tblTable.delegate = self
+        var names = [repository.quizzes[0].name : repository.quizzes[0].desc, repository.quizzes[1].name : repository.quizzes[1].desc, repository.quizzes[2].name : repository.quizzes[2].desc]
+        stringTableData1 = DataTable(names)
         
-        let data = DataLoader().quizzes
-        print(data)
+        tblTable.dataSource = stringTableData1
+        tblTable.delegate = self
+        print("hello")
+        print(repository.quizzes2)
+        
+    
         
     }
     

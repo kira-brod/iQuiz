@@ -24,13 +24,23 @@ class FinishedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scoreLabel.text = "\(score) out of 2"
+        var total = 0
         
-        if score == 1 {
-            des.text = "Almost"
-        } else if score == 2 {
-            des.text = "Perfect!"
+        if indexPick == 1 {
+            total = 3
         } else {
+            total = 1
+        }
+        
+        scoreLabel.text = "\(score) out of \(total)"
+        
+        if score == 2 {
+            des.text = "Almost"
+        } else if score == 3 {
+            des.text = "Perfect!"
+        } else if score == 1 {
+            des.text = "Good try"
+        }else {
             des.text = "Not quite"
         }
         // Do any additional setup after loading the view.

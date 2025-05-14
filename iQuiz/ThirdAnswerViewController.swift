@@ -1,20 +1,24 @@
 //
-//  ActualQuestion2ViewController.swift
+//  ThirdAnswerViewController.swift
 //  iQuiz
 //
-//  Created by Kira Brodsky on 5/11/25.
+//  Created by Kira Brodsky on 5/14/25.
 //
 
 import UIKit
 
-class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
+class ThirdAnswerViewController: UIViewController, UITableViewDelegate {
 
-    @IBOutlet weak var tblTable: UITableView!
-    var repository : QuizRepository = QuizRepository()
     var quiz = Quiz()
-    
+    var repository = QuizRepository()
+    var correct = false
     var indexPick : Int = 0
-    var score = 0
+    var score : Int = 0
+    
+    @IBOutlet weak var tblTable: UITableView!
+    
+    @IBOutlet weak var CheckAnswer: UILabel!
+    
     
     class DataTable : NSObject, UITableViewDataSource {
         var data : [String: [String]] = [:]
@@ -41,20 +45,21 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
             return 4
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            print(indexPath.row)
-            print(quiz1.correct1Index)
-            NSLog("hiii")
-            if indexPath.row == quiz1.correct2Index {
+            if indexPath.row == quiz1.correct3Index {
                 quiz1.score += 1
-                quiz1.correct = true
             }
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "two")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "question")!
             let division = (Array(data.keys))[indexPath.section]
             let team = data[division]?[indexPath.row]
             cell.textLabel?.text = team
+            
+            if indexPath.row == quiz1.correct3Index {
+                cell.backgroundColor = UIColor(red: 0.4, green: 0.2, blue: 0.9, alpha: 0.2)
+            }
+            
             return cell
         }
     }
@@ -63,38 +68,50 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
     var stringTableData1 = DataTable(["hello" : ["efw", "wewe"]])
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        stringTableData1 = DataTable(repository.quizzes[indexPick].question2, quiz: repository.quizzes[indexPick])
         
+        if correct {
+            CheckAnswer.text = "Correct!"
+        }
+        
+        
+//        tblTable.dataSource = stringTableData
+//        tblTable.delegate = self
+        
+//        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
+        
+        stringTableData1 = DataTable(repository.quizzes[indexPick].question3, quiz: repository.quizzes[indexPick])
+                
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
+
+        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("User selected \(indexPath)")
         
-        if indexPath.row == repository.quizzes[indexPick].correct2Index  {
-            quiz.score += 1
-            NSLog("score: \(quiz.score)")
-            quiz.correct = true
-            score += 1
-        } else {
-            quiz.correct = false
-        }
+//        if indexPath.row == 2 {
+//            quiz1.score += 1
+//            NSLog("score: \(quiz1.score)")
+//        }
+        
+        NSLog("\(score)")
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ans" {
-            let controller = segue.destination as? ActualQuestion2AnswerViewController
+        if segue.identifier == "finish" {
+            let controller = segue.destination as? FinishedViewController
             controller?.quiz = quiz
+            controller?.score = score
             controller?.repository = repository
             controller?.correct = quiz.correct
             controller?.indexPick = indexPick
-            controller?.score = score
-            print("Preparing for segue - indexPick: \(quiz) and score: \(score)")
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             
             
