@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     class StringTableData: NSObject, UITableViewDataSource {
         
-        
+    
         let data : [String] = [
             "Mathematics",
             "Marvel Super Heroes",
@@ -59,15 +59,19 @@ class ViewController: UIViewController, UITableViewDelegate {
         
         tblTable.dataSource = stringTableData
         tblTable.delegate = self
+        
+        let data = DataLoader().quizzes
+        print(data)
+        
     }
     
-    @IBAction func Settings(_ sender: Any) {
-        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Close the alert"),style: .default, handler: { _ in
-              alert.dismiss(animated: true)
-        }))
-        self.present(alert, animated: true)
-    }
+//    @IBAction func Settings(_ sender: Any) {
+//        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Close the alert"),style: .default, handler: { _ in
+//              alert.dismiss(animated: true)
+//        }))
+//        self.present(alert, animated: true)
+//    }
     
 //    func tableView (_ tableView : UITableView, didSelectRowAt indexPath : IndexPath) {
 //        NSLog("You selected cell \(indexPath.row)")

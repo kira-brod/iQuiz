@@ -8,6 +8,78 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Settings View Controller-->
+        <scene sceneID="jnC-Ao-cug">
+            <objects>
+                <viewController id="Usy-eu-mAS" customClass="SettingsViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TIZ-7G-HkD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://tednewardsandbox.site44.com/questions.json" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNR-Bs-p33">
+                                <rect key="frame" x="16" y="171" width="371" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrQ-uP-RO7">
+                                <rect key="frame" x="142" y="227" width="112" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Check Now"/>
+                                <connections>
+                                    <action selector="goPushed:" destination="Usy-eu-mAS" eventType="touchUpInside" id="m7e-G4-dFU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="headers                                                                         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mx3-ng-Bm1">
+                                <rect key="frame" x="29" y="235" width="379" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="body" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sok-Qj-s2q">
+                                <rect key="frame" x="29" y="444" width="323" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="odW-Ad-aIc">
+                                <rect key="frame" x="114" y="234" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ylf-wh-bd4">
+                                <rect key="frame" x="0.0" y="95" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Quiz" id="ZBr-ZY-YCM">
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" identifier="backHome" modalPresentationStyle="fullScreen" id="0n6-Ha-P2d"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Settings" id="IqM-Nk-uiE">
+                                        <connections>
+                                            <action selector="Settings:" destination="BYZ-38-t0r" id="Tue-3u-tTi"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vIK-Bs-SC8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressField" destination="kNR-Bs-p33" id="EHm-vi-3Q4"/>
+                        <outlet property="bodyLabel" destination="sok-Qj-s2q" id="jOH-gU-xU1"/>
+                        <outlet property="headersLabel" destination="mx3-ng-Bm1" id="Pdn-Y1-fnk"/>
+                        <outlet property="spinner" destination="odW-Ad-aIc" id="yoJ-SE-DjK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3j2-2K-f4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="768.70229007633588" y="-827.46478873239437"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -20,10 +92,11 @@
                                 <rect key="frame" x="0.0" y="94" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="Fea-At-I7c"/>
+                                    <barButtonItem title="Quiz" id="Fea-At-I7c"/>
                                     <barButtonItem title="Settings" id="GEr-sH-dDa">
                                         <connections>
                                             <action selector="Settings:" destination="BYZ-38-t0r" id="hEY-ol-GZG"/>
+                                            <segue destination="Usy-eu-mAS" kind="presentation" identifier="settings" modalPresentationStyle="fullScreen" id="aN2-M3-LW7"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -395,7 +468,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jfe-cy-EPp"/>
+        <segue reference="0n6-Ha-P2d"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="questionmark.circle.dashed" catalog="system" width="128" height="123"/>
