@@ -44,9 +44,9 @@ public class DataLoader {
         }
     }
     
-    func sort() {
-        quizzes.sort { $0.title < $1.title }
-    }
+//    func sort() {
+//        quizzes.sort { $0.title < $1.title }
+//    }
 }
 
 var repository = QuizRepository()

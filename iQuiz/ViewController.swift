@@ -66,6 +66,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         var quiz1 : Quiz = Quiz()
         
         var names : [String] = []
+        var detail : [String] = []
         var repo = QuizRepository()
         
 
@@ -84,9 +85,9 @@ class ViewController: UIViewController, UITableViewDelegate {
             
         }
         
-        init(_ items : [String : String]) {
-            data = items
-            
+        init(_ names : [String], _ detail : [String]) {
+            self.names = names
+            self.detail = detail
         }
         
         
@@ -110,15 +111,14 @@ class ViewController: UIViewController, UITableViewDelegate {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell")!
             
-            
-            cell.textLabel?.text = (Array(data.keys))[indexPath.row]
-            cell.detailTextLabel?.text = (Array(data.values))[indexPath.row]
+            cell.textLabel?.text = (names)[indexPath.row]
+            cell.detailTextLabel?.text = (detail)[indexPath.row]
             return cell
         }
 
     }
     
-    var stringTableData1 = DataTable(["hello" : "bye"])
+    var stringTableData1 = DataTable(["hello"], ["bye"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,13 +128,14 @@ class ViewController: UIViewController, UITableViewDelegate {
         var repository = QuizRepository(change, urlString)
 
         
-        var names = [repository.quizzes[0].name : repository.quizzes[0].desc, repository.quizzes[1].name : repository.quizzes[1].desc, repository.quizzes[2].name : repository.quizzes[2].desc]
-        stringTableData1 = DataTable(names)
+        var names = [repository.quizzes[0].name, repository.quizzes[1].name, repository.quizzes[2].name]
+        var detail = [repository.quizzes[0].desc, repository.quizzes[1].desc, repository.quizzes[2].desc]
+        stringTableData1 = DataTable(names, detail)
         
         tblTable.dataSource = stringTableData1
         tblTable.delegate = self
-        print("hello")
-        print(repository.quizzes2)
+        print(names)
+        print(repository.quizzes[0].name)
         
     
         

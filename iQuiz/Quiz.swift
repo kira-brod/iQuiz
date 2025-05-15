@@ -153,6 +153,8 @@ class QuizRepository {
             quizzes[0].name = quizzes2[0].title
             quizzes[1].name = quizzes2[1].title
             quizzes[2].name = quizzes2[2].title
+        
+
             
             quizzes[0].desc = quizzes2[0].description
             quizzes[1].desc = quizzes2[1].description
@@ -177,7 +179,9 @@ class QuizRepository {
             quizzes = [quiz1, quiz2, quiz3]
         }
         
-        
+        print(quizzes[0].name)
+        print(quizzes[1].name)
+        print(quizzes[2].name)
         
         
     }
