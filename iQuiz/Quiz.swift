@@ -101,41 +101,25 @@ class QuizRepository {
 
                 var topics: [Quiz1] = []
 
-     
-
                 for item in data {
-
                     let title = item.title
-
                     let desc = item.desc
-
                     let questions = item.questions
 
-     
-
                     let parsedQuestions = questions.compactMap { q -> Question1? in
-
                         let text = q.text
-
                         let options = q.answers
-
                         let correctStr = q.answer
-
                         let correctIndex = Int(correctStr)
-
                         return Question1(text: text, options: options, correctStr: correctStr)
 
                     }
 
-     
-
-                    let topic = Quiz1(title: title, description: desc, imageName: "default.icon", questions: parsedQuestions)
+                    let topic = Quiz1(title: title, description: desc, imageName: "def", questions: parsedQuestions)
 
                     topics.append(topic)
 
                 }
-
-     
 
                 return topics
 
