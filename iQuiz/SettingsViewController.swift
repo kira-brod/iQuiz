@@ -43,6 +43,8 @@ public class DataLoader {
     }
 }
 
+var repository = QuizRepository()
+
 
 class SettingsViewController: UIViewController {
     
@@ -53,12 +55,15 @@ class SettingsViewController: UIViewController {
     
     var headerString : String = ""
     var bodyString : String = ""
+    var change = false
+    
 
 
         
     @IBAction func goPushed(_ sender: Any) {
       headersLabel.text! = ""
       bodyLabel.text! = "Sending request \nto \(addressField.text!)..."
+        
 
       // {{## BEGIN create-url ##}}
       // Set up the request before we do the off-UI thread work
@@ -69,7 +74,7 @@ class SettingsViewController: UIViewController {
         return
       }
       // {{## END create-url ##}}
-
+//        repository.load = true
       // {{## BEGIN create-request ##}}
       var request = URLRequest(url: url!)
       request.httpMethod = "GET"
@@ -81,7 +86,8 @@ class SettingsViewController: UIViewController {
       }
       // {{## END create-request ##}}
         
-        
+      change = true
+      repository = QuizRepository(change)
       
       // Set up a spinner
       spinner.startAnimating()
@@ -141,6 +147,19 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
       // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backHome" {
+            let controller = segue.destination as? ViewController
+//            controller?.quiz = quiz
+            controller?.repository = repository
+            //            controller?.correct = quiz.correct
+//            controller?.indexPick = indexPick
+//            controller?.score = score
+              controller?.change = change
+            print("Preparing for segue - change: \(change)")
+        }
     }
     
 

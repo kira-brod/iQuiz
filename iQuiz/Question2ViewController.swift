@@ -10,10 +10,11 @@ import UIKit
 class Question2ViewController: UIViewController, UITableViewDelegate {
     
     var quiz = Quiz()
-    var repository = QuizRepository()
     var correct = false
     var indexPick : Int = 0
     var score = 0
+    var change = false
+    var repository = QuizRepository()
     
     
     @IBOutlet weak var check: UIButton!
@@ -79,6 +80,9 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         
         let data1 = DataLoader().quizzes[indexPick].questions
+        
+        let repository = QuizRepository(change)
+
 
         
         if correct {
@@ -120,10 +124,18 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
                 //            controller?.correct = quiz.correct
                 controller?.indexPick = indexPick
                 controller?.score = score
-                print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
+                controller?.change = change
+                print("Preparing for segue - change: \(change) and score: \(score) hiii")
             }
 
+        if segue.identifier == "back" {
+            let controller = segue.destination as? ViewController
+            controller?.change = change
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+
             
+            
+        }
             
         
     }

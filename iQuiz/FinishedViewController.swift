@@ -14,6 +14,7 @@ class FinishedViewController: UIViewController {
     var correct = false
     var indexPick : Int = 0
     var score : Int = 0
+    var change = false
 
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -46,6 +47,13 @@ class FinishedViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "home" {
+            let controller = segue.destination as? ViewController
+            controller?.change = change
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
+        }
+    }
 
     /*
     // MARK: - Navigation

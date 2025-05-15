@@ -12,6 +12,7 @@ class ThirdQuestionViewController: UIViewController, UITableViewDelegate{
     @IBOutlet weak var tblTable: UITableView!
     var repository : QuizRepository = QuizRepository()
     var quiz = Quiz()
+    var change = false
     
     var indexPick : Int = 0
     var score = 0
@@ -65,6 +66,7 @@ class ThirdQuestionViewController: UIViewController, UITableViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var repository = QuizRepository(change)
 
         // Do any additional setup after loading the view.
         stringTableData1 = DataTable(repository.quizzes[indexPick].question3, quiz: repository.quizzes[indexPick])
@@ -94,7 +96,17 @@ class ThirdQuestionViewController: UIViewController, UITableViewDelegate{
             controller?.correct = quiz.correct
             controller?.indexPick = indexPick
             controller?.score = score
+            controller?.change = change
             print("Preparing for segue - indexPick: \(quiz) and score: \(score)")
+
+            
+            
+        }
+        
+        if segue.identifier == "back" {
+            let controller = segue.destination as? ViewController
+            controller?.change = change
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             
             

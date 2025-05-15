@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 //    ])
     
     var indexPick : Int = 0
+    var change = false
     var repository = QuizRepository()
     
     
@@ -108,6 +109,10 @@ class ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        
+        var repository = QuizRepository(change)
+
+        
         var names = [repository.quizzes[0].name : repository.quizzes[0].desc, repository.quizzes[1].name : repository.quizzes[1].desc, repository.quizzes[2].name : repository.quizzes[2].desc]
         stringTableData1 = DataTable(names)
         
@@ -158,6 +163,8 @@ class ViewController: UIViewController, UITableViewDelegate {
         if segue.identifier == "FirstViewController" {
             let controller = segue.destination as? Question1ViewController
             controller?.indexPick = indexPick
+            controller?.repository = repository
+            controller?.change = change
             print("Preparing for segue - indexPick: \(indexPick)")
 
             

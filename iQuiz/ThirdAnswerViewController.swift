@@ -14,6 +14,7 @@ class ThirdAnswerViewController: UIViewController, UITableViewDelegate {
     var correct = false
     var indexPick : Int = 0
     var score : Int = 0
+    var change = false
     
     @IBOutlet weak var tblTable: UITableView!
     
@@ -72,6 +73,8 @@ class ThirdAnswerViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var repository = QuizRepository(change)
+        
         if correct {
             CheckAnswer.text = "Correct!"
         }
@@ -111,6 +114,16 @@ class ThirdAnswerViewController: UIViewController, UITableViewDelegate {
             controller?.repository = repository
             controller?.correct = quiz.correct
             controller?.indexPick = indexPick
+            controller?.change = change
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+
+            
+            
+        }
+        
+        if segue.identifier == "back" {
+            let controller = segue.destination as? ViewController
+            controller?.change = change
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             

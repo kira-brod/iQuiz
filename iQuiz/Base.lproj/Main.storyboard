@@ -474,6 +474,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxw-gj-ySP">
+                                <rect key="frame" x="51" y="753" width="62" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="back" modalPresentationStyle="fullScreen" id="eiV-3R-iRG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dcf-0V-z74"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -528,6 +537,15 @@
                                     <segue destination="nUK-55-PMm" kind="presentation" identifier="ans" modalPresentationStyle="fullScreen" id="c0g-hB-ZL2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WB2-HA-BDI">
+                                <rect key="frame" x="56" y="749" width="62" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="back" modalPresentationStyle="fullScreen" id="OL3-J6-gBa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h7J-ql-9sx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -561,7 +579,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Next"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="back" modalPresentationStyle="fullScreen" id="Jfe-cy-EPp"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="home" modalPresentationStyle="fullScreen" id="Jfe-cy-EPp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Perfect!  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voW-xz-Ale">
@@ -593,8 +611,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pdb-lP-vJK"/>
-        <segue reference="Jfe-cy-EPp"/>
+        <segue reference="PM4-6j-amL"/>
+        <segue reference="pou-iy-ZhT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="questionmark.circle.dashed" catalog="system" width="128" height="123"/>
