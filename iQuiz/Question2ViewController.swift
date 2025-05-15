@@ -15,6 +15,7 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     var score = 0
     var change = false
     var repository = QuizRepository()
+    var urlString : String = ""
     
     
     @IBOutlet weak var check: UIButton!
@@ -79,9 +80,9 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let data1 = DataLoader().quizzes[indexPick].questions
+        let data1 = DataLoader(urlString).quizzes[indexPick].questions
         
-        let repository = QuizRepository(change)
+        let repository = QuizRepository(change, urlString)
 
 
         
@@ -125,12 +126,32 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
                 controller?.indexPick = indexPick
                 controller?.score = score
                 controller?.change = change
+                controller?.urlString = urlString
+
                 print("Preparing for segue - change: \(change) and score: \(score) hiii")
             }
 
         if segue.identifier == "back" {
             let controller = segue.destination as? ViewController
             controller?.change = change
+            controller?.urlString = urlString
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+
+            
+            
+        }
+        
+        if segue.identifier == "finish" {
+            let controller = segue.destination as? FinishedViewController
+            controller?.quiz = quiz
+            controller?.score = score
+            controller?.repository = repository
+            controller?.correct = quiz.correct
+            controller?.indexPick = indexPick
+            controller?.change = change
+            controller?.urlString = urlString
+
+            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             

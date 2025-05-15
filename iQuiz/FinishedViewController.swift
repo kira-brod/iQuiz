@@ -15,6 +15,7 @@ class FinishedViewController: UIViewController {
     var indexPick : Int = 0
     var score : Int = 0
     var change = false
+    var urlString : String = ""
 
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -35,15 +36,24 @@ class FinishedViewController: UIViewController {
         
         scoreLabel.text = "\(score) out of \(total)"
         
-        if score == 2 {
-            des.text = "Almost"
-        } else if score == 3 {
-            des.text = "Perfect!"
-        } else if score == 1 {
-            des.text = "Good try"
-        }else {
-            des.text = "Not quite"
+        if total == 3 {
+            if score == 2 {
+                des.text = "Almost"
+            } else if score == 3 {
+                des.text = "Perfect!"
+            } else if score == 1 {
+                des.text = "Good try"
+            }else {
+                des.text = "Not quite"
+            }
+        } else {
+            if score == 1 {
+                des.text = "Perfect!"
+            } else {
+                des.text = "Not quite"
+            }
         }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -51,6 +61,8 @@ class FinishedViewController: UIViewController {
         if segue.identifier == "home" {
             let controller = segue.destination as? ViewController
             controller?.change = change
+            controller?.urlString = urlString
+
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
         }
     }

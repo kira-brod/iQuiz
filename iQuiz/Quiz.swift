@@ -93,8 +93,9 @@ class Quiz {
 
 class QuizRepository {
     
-    let data = DataLoader().quizzes
+    var data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
     var load = false
+    var url : String
     
     func parseQuizTopics(_ data: [QuizJSON]) -> [Quiz1] {
 
@@ -152,9 +153,14 @@ class QuizRepository {
     
     init () {
         quizzes = [quiz1, quiz2, quiz3]
+        self.url = "https://tednewardsandbox.site44.com/questions.json"
+        self.data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
     }
     
-    init (_ load : Bool) {
+    init (_ load : Bool, _ url : String ) {
+        
+        self.url = url
+        self.data = DataLoader(url).quizzes
         
         if load {
             quizzes = [quiz1, quiz2, quiz3]
@@ -186,6 +192,7 @@ class QuizRepository {
         } else {
             quizzes = [quiz1, quiz2, quiz3]
         }
+        
         
         
         

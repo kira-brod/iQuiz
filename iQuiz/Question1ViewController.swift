@@ -16,6 +16,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
     var change = false
     var quiz = Quiz()
     var repository = QuizRepository()
+    var urlString : String = ""
     
     
     
@@ -113,7 +114,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
 //        tblTable.delegate = self
         
 //        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
-        let repository : QuizRepository = QuizRepository(change)
+        let repository : QuizRepository = QuizRepository(change, urlString)
 
         
         stringTableData1 = DataTable(repository.quizzes[indexPick].question1, quiz: repository.quizzes[indexPick])
@@ -146,6 +147,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
             controller?.indexPick = indexPick
             controller?.score = score
             controller?.change = change
+            controller?.urlString = urlString
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             
@@ -155,6 +157,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
         if segue.identifier == "back" {
             let controller = segue.destination as? ViewController
             controller?.change = change
+            controller?.urlString = urlString
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             

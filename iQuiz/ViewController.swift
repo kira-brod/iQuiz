@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     var indexPick : Int = 0
     var change = false
     var repository = QuizRepository()
+    var urlString : String = ""
     
     
     class StringTableData: NSObject, UITableViewDataSource {
@@ -64,11 +65,22 @@ class ViewController: UIViewController, UITableViewDelegate {
         var data : [String: String] = [:]
         var quiz1 : Quiz = Quiz()
         
+        var names : [String] = []
+        var repo = QuizRepository()
+        
+
+        
+        
+        
         
         
         init(_ items : [String : String], quiz q : Quiz) {
             data = items
             quiz1 = q
+            
+            for mapKey in Array(data.keys) {
+                names.append(mapKey)
+            }
             
         }
         
@@ -95,7 +107,10 @@ class ViewController: UIViewController, UITableViewDelegate {
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell")!
+            
+            
             cell.textLabel?.text = (Array(data.keys))[indexPath.row]
             cell.detailTextLabel?.text = (Array(data.values))[indexPath.row]
             return cell
@@ -110,7 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         // Do any additional setup after loading the view.
         
         
-        var repository = QuizRepository(change)
+        var repository = QuizRepository(change, urlString)
 
         
         var names = [repository.quizzes[0].name : repository.quizzes[0].desc, repository.quizzes[1].name : repository.quizzes[1].desc, repository.quizzes[2].name : repository.quizzes[2].desc]
@@ -165,6 +180,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             controller?.indexPick = indexPick
             controller?.repository = repository
             controller?.change = change
+            controller?.urlString = urlString
             print("Preparing for segue - indexPick: \(indexPick)")
 
             

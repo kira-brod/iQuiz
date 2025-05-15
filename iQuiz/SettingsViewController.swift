@@ -21,13 +21,19 @@ struct Question: Codable {
 
 public class DataLoader {
     @Published var quizzes = [QuizJSON]()
+    var urlString: String = "https://tednewardsandbox.site44.com/questions.json"
     
-    init() {
-        load()
+    init(_ url1 : String) {
+        
+        if url1 != "" {
+            load(url1)
+        } else {
+            load("https://tednewardsandbox.site44.com/questions.json")
+        }
     }
     
-    func load() {
-        let url = URL(string: "https://tednewardsandbox.site44.com/questions.json")!
+    func load( _ url1 : String) {
+        let url = URL(string: url1)!
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
@@ -56,6 +62,11 @@ class SettingsViewController: UIViewController {
     var headerString : String = ""
     var bodyString : String = ""
     var change = false
+    var url : URL?
+    var data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
+
+    
+    
     
 
 
@@ -67,7 +78,7 @@ class SettingsViewController: UIViewController {
 
       // {{## BEGIN create-url ##}}
       // Set up the request before we do the off-UI thread work
-      let url = URL(string: self.addressField.text!)
+      url = URL(string: self.addressField.text!)
       if url == nil {
         // TODO: Need a better error message
         NSLog("Bad address")
@@ -87,7 +98,7 @@ class SettingsViewController: UIViewController {
       // {{## END create-request ##}}
         
       change = true
-      repository = QuizRepository(change)
+      repository = QuizRepository(change, self.addressField.text!)
       
       // Set up a spinner
       spinner.startAnimating()
@@ -141,8 +152,12 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+        data = DataLoader(addressField.text!).quizzes
+        repository.data = data
+      
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
@@ -158,6 +173,7 @@ class SettingsViewController: UIViewController {
 //            controller?.indexPick = indexPick
 //            controller?.score = score
               controller?.change = change
+            controller?.urlString = "https://tednewardsandbox.site44.com/questions.json"
             print("Preparing for segue - change: \(change)")
         }
     }

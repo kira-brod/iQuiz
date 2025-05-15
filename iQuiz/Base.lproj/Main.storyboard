@@ -276,7 +276,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Finish"/>
                                 <connections>
-                                    <segue destination="fpT-zd-VVn" kind="presentation" identifier="done" modalPresentationStyle="fullScreen" id="pdb-lP-vJK"/>
+                                    <segue destination="fpT-zd-VVn" kind="presentation" identifier="finish" modalPresentationStyle="fullScreen" id="pdb-lP-vJK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -611,7 +611,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PM4-6j-amL"/>
+        <segue reference="pdb-lP-vJK"/>
         <segue reference="pou-iy-ZhT"/>
     </inferredMetricsTieBreakers>
     <resources>
