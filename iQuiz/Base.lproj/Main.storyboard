@@ -65,6 +65,33 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-Su-NCY">
+                                <rect key="frame" x="265" y="747" width="65" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Store"/>
+                                <connections>
+                                    <action selector="storeData:" destination="Usy-eu-mAS" eventType="touchUpInside" id="jjX-SS-26b"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTj-ne-Pzo">
+                                <rect key="frame" x="72" y="747" width="62" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Load"/>
+                                <connections>
+                                    <action selector="loadData:" destination="Usy-eu-mAS" eventType="touchUpInside" id="xJr-cT-hGH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otq-IM-OEB">
+                                <rect key="frame" x="170" y="656" width="57" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Test"/>
+                                <connections>
+                                    <action selector="Test:" destination="Usy-eu-mAS" eventType="touchUpInside" id="VMU-ER-byU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vIK-Bs-SC8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -612,7 +639,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="pdb-lP-vJK"/>
-        <segue reference="pou-iy-ZhT"/>
+        <segue reference="0n6-Ha-P2d"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="questionmark.circle.dashed" catalog="system" width="128" height="123"/>

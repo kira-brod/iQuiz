@@ -49,7 +49,7 @@ public class DataLoader {
 //    }
 }
 
-var repository = QuizRepository()
+var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
 
 
 class SettingsViewController: UIViewController {
@@ -64,8 +64,13 @@ class SettingsViewController: UIViewController {
     var change = false
     var url : URL?
     var data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
-
     
+    let file = NSHomeDirectory() + "/Documents/archive.quizzes"
+
+
+    var quizzes : [Quiz1] = []
+    
+    var reload = false
     
     
 
@@ -157,6 +162,40 @@ class SettingsViewController: UIViewController {
       
     }
     
+    @IBAction func storeData(_ sender: Any) {
+        
+        quizzes = parseQuizTopics(data)
+        print("Save pressed")
+        NSKeyedArchiver.archiveRootObject(quizzes, toFile: file)
+        
+        let defaults = UserDefaults.standard
+        
+        let string = "https://tednewardsandbox.site44.com/questions.json"
+        
+        defaults.set("\(self.addressField.text ?? string)", forKey: "name_preference")
+        
+    }
+    
+    @IBAction func Test(_ sender: Any) {
+        print(quizzes[0].desc)
+    }
+    
+    
+    @IBAction func loadData(_ sender: Any) {
+       
+        print("Load pressed")
+        guard let loadedQuizzes =
+                NSKeyedUnarchiver.unarchiveObject(withFile: file) as? [Quiz1] else {
+            let alert = UIAlertController(title: "Error", message: "Quizzes failed to load", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        repository.quizzes2 = loadedQuizzes
+        print(loadedQuizzes[0].desc)
+        change = true
+        reload = true
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -174,8 +213,11 @@ class SettingsViewController: UIViewController {
 //            controller?.score = score
               controller?.change = change
             controller?.urlString = "https://tednewardsandbox.site44.com/questions.json"
-            print("Preparing for segue - change: \(change)")
+            controller?.reload = reload
+            controller?.saved = quizzes
+            print("Preparing for segue - repo: \(repository.quizzes2)")
         }
+        
     }
     
 

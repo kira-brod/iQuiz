@@ -20,8 +20,10 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     var indexPick : Int = 0
     var change = false
-    var repository = QuizRepository()
+    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
     var urlString : String = ""
+    var reload = false
+    var saved : [Quiz1] = []
     
     
     class StringTableData: NSObject, UITableViewDataSource {
@@ -63,11 +65,11 @@ class ViewController: UIViewController, UITableViewDelegate {
     class DataTable : NSObject, UITableViewDataSource {
         
         var data : [String: String] = [:]
-        var quiz1 : Quiz = Quiz()
+        var quiz1 : Quiz = Quiz(name: "Marvel Super Heroes", desc: "hero quiz", score: 0, question1: ["What is the name of the green guy?" : ["Greenie", "Hulk", "Verde", "grass"]], question2: ["Who shoots webs?" : ["spider man", "iron man", "captain america", "Hulk"]], question3: ["What tool does Thor have?" : ["sword", "hammer", "screw driver", "wrench"]], correct1Index: 1, correct2Index: 0, correct3Index: 1)
         
         var names : [String] = []
         var detail : [String] = []
-        var repo = QuizRepository()
+        var repo = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
         
 
         
@@ -124,6 +126,9 @@ class ViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        if reload {
+            tblTable.reloadData()
+        }
         
         var repository = QuizRepository(change, urlString)
 
@@ -186,6 +191,11 @@ class ViewController: UIViewController, UITableViewDelegate {
 
             
             
+        }
+        
+        if segue.identifier == "settings" {
+            let controller = segue.destination as? SettingsViewController
+            controller?.quizzes = saved
         }
     }
        

@@ -7,12 +7,63 @@
 
 import Foundation
 
-class Question1 {
+func parseQuizTopics(_ data: [QuizJSON]) -> [Quiz1] {
+
+            var topics: [Quiz1] = []
+
+            for item in data {
+                let title = item.title
+                let desc = item.desc
+                let questions = item.questions
+
+                let parsedQuestions = questions.compactMap { q -> Question1? in
+                    let text = q.text
+                    let options = q.answers
+                    let correctStr = q.answer
+                    let correctIndex = Int(correctStr)
+                    return Question1(text: text, options: options, correctStr: correctStr)
+
+                }
+
+                let topic = Quiz1(title: title, desc: desc, imageName: "def", questions: parsedQuestions)
+
+                topics.append(topic)
+
+            }
+
+            return topics
+
+}
+
+class Question1: NSObject, NSCoding {
     
     var text :String
     var options : [String]
     var correctStr : String
     var correctIndex: Int
+    
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.text, forKey: "text")
+        coder.encode(self.options, forKey: "options")
+        coder.encodeCInt(Int32(self.correctIndex), forKey: "correctIndex")
+        coder.encode(self.correctStr, forKey: "correctStr")
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        guard let text = decoder.decodeObject(forKey: "text") as? String,
+              let options = decoder.decodeObject(forKey: "options") as? [String],
+              let correctStr = decoder.decodeObject(forKey: "correctStr") as? String
+            else { return nil }
+        
+        self.init(
+            text: text,
+            options: options,
+            correctStr: correctStr
+        )
+    }
+    
+    
     
     init(text: String, options: [String], correctStr: String) {
         self.text = text
@@ -23,21 +74,87 @@ class Question1 {
     
 }
 
-class Quiz1 {
+class Quiz1: NSObject, NSCoding {
+    func encode(with coder: NSCoder) {
+        coder.encode(self.title, forKey: "title")
+        coder.encode(self.desc, forKey: "desc")
+        coder.encode(self.imageName, forKey: "imageName")
+        coder.encode(self.questions, forKey: "questions")
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        guard let title = decoder.decodeObject(forKey: "title") as? String,
+              let questions = decoder.decodeObject(forKey: "questions") as? [Question1],
+              let imageName = decoder.decodeObject(forKey: "imageName") as? String,
+              let desc = decoder.decodeObject(forKey: "desc") as? String
+
+            else { return nil }
+        
+        self.init(
+            title: title,
+            desc: desc,
+            imageName: imageName,
+            questions: questions
+        )
+    }
+    
     var title: String
-    var description : String
+    var desc : String
     var imageName: String
     var questions: [Question1]
     
-    init(title: String, description: String, imageName: String, questions: [Question1]) {
+    init(title: String, desc: String, imageName: String, questions: [Question1]) {
         self.title = title
-        self.description = description
+        self.desc = desc
         self.imageName = imageName
         self.questions = questions
     }
 }
 
-class Quiz {
+class Quiz: NSObject, NSCoding {
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.name, forKey: "name")
+        coder.encode(self.correct, forKey: "correct")
+        coder.encodeCInt(Int32(self.score), forKey: "score")
+        coder.encode(self.desc, forKey: "desc")
+        
+        coder.encode(self.question1, forKey: "question1")
+        coder.encode(self.question2, forKey: "question2")
+        coder.encode(self.question3, forKey: "question3")
+        
+        coder.encodeCInt(Int32(self.correct1Index), forKey: "correct1Index")
+        coder.encodeCInt(Int32(self.correct2Index), forKey: "correct2Index")
+        coder.encodeCInt(Int32(self.correct3Index), forKey: "correct3Index")
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        guard let name = decoder.decodeObject(forKey: "name")  as? String else {return nil}
+        guard let desc = decoder.decodeObject(forKey: "desc")  as? String else {return nil}
+        guard let correct = decoder.decodeBool(forKey: "correct") as? Bool else {return nil}
+        guard let question1 = decoder.decodeObject(forKey: "question1")  as? [String: [String]] else {return nil}
+        guard let question2 = decoder.decodeObject(forKey: "question2")  as? [String: [String]] else {return nil}
+        guard let question3 = decoder.decodeObject(forKey: "question3")  as? [String: [String]] else {return nil}
+        guard let score = decoder.decodeInteger(forKey: "score") as Int? else {return nil}
+        guard let correct1Index = decoder.decodeInteger(forKey: "correct1Index") as Int? else {return nil}
+        guard let correct2Index = decoder.decodeInteger(forKey: "correct2Index") as Int? else {return nil}
+        guard let correct3Index = decoder.decodeInteger(forKey: "correct3Index") as Int? else {return nil}
+
+
+        
+        self.init(
+            name: name,
+            desc: desc,
+            score: score,
+            question1: question1,
+            question2: question2,
+            question3: question3,
+            correct1Index: correct1Index,
+            correct2Index: correct2Index,
+            correct3Index: correct3Index,
+        )
+    }
+    
     
     
     var name : String = ""
@@ -75,55 +192,47 @@ class Quiz {
         self.questions = []
     }
     
-    init() {
-        self.name = "name"
-        self.score = 0
-        self.question1 = ["question1" : ["answers", "answers"]]
-        self.question2 = ["question1" : ["answers", "answers"]]
-        self.question3 = ["question1" : ["answers", "answers"]]
-        self.correct1Index = 0
-        self.correct2Index = 0
-        self.correct3Index = 0
-        self.correct = false
-        self.desc = ""
-        self.questions = []
-        
-    }
+//    init() {
+//        self.name = "name"
+//        self.score = 0
+//        self.question1 = ["question1" : ["answers", "answers"]]
+//        self.question2 = ["question1" : ["answers", "answers"]]
+//        self.question3 = ["question1" : ["answers", "answers"]]
+//        self.correct1Index = 0
+//        self.correct2Index = 0
+//        self.correct3Index = 0
+//        self.correct = false
+//        self.desc = ""
+//        self.questions = []
+//        
+//    }
 }
 
-class QuizRepository {
+class QuizRepository: NSObject, NSCoding {
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(self.load, forKey: "load")
+        coder.encode(self.url, forKey: "url")
+        coder.encode(self.data, forKey: "data")
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        guard let data = decoder.decodeObject(forKey: "data") as? [QuizJSON],
+              let load = decoder.decodeBool(forKey: "load") as? Bool,
+              let url = decoder.decodeObject(forKey: "url") as? String
+            else { return nil }
+        
+        self.init(
+            load,
+            url
+        )
+    }
+    
     
     var data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
     var load = false
     var url : String
     
-    func parseQuizTopics(_ data: [QuizJSON]) -> [Quiz1] {
-
-                var topics: [Quiz1] = []
-
-                for item in data {
-                    let title = item.title
-                    let desc = item.desc
-                    let questions = item.questions
-
-                    let parsedQuestions = questions.compactMap { q -> Question1? in
-                        let text = q.text
-                        let options = q.answers
-                        let correctStr = q.answer
-                        let correctIndex = Int(correctStr)
-                        return Question1(text: text, options: options, correctStr: correctStr)
-
-                    }
-
-                    let topic = Quiz1(title: title, description: desc, imageName: "def", questions: parsedQuestions)
-
-                    topics.append(topic)
-
-                }
-
-                return topics
-
-            }
     
     var quiz1 : Quiz = Quiz(name: "Mathematics", desc: "math quiz", score: 0, question1: ["2 * 6?" : ["4", "8", "12", "3"]], question2: ["4 + 12?" : ["16", "20", "24", "8"]], question3: ["5 - 4?" : ["9", "1", "17", "2"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
     
@@ -135,11 +244,11 @@ class QuizRepository {
     var quizzes : [Quiz] = []
     var quizzes2 : [Quiz1]  = []
     
-    init () {
-        quizzes = [quiz1, quiz2, quiz3]
-        self.url = "https://tednewardsandbox.site44.com/questions.json"
-        self.data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
-    }
+//    init () {
+//        quizzes = [quiz1, quiz2, quiz3]
+//        self.url = "https://tednewardsandbox.site44.com/questions.json"
+//        self.data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
+//    }
     
     init (_ load : Bool, _ url : String ) {
         
@@ -156,9 +265,9 @@ class QuizRepository {
         
 
             
-            quizzes[0].desc = quizzes2[0].description
-            quizzes[1].desc = quizzes2[1].description
-            quizzes[2].desc = quizzes2[2].description
+            quizzes[0].desc = quizzes2[0].desc
+            quizzes[1].desc = quizzes2[1].desc
+            quizzes[2].desc = quizzes2[2].desc
             
             quizzes[0].question1 = [quizzes2[0].questions[0].text: quizzes2[0].questions[0].options]
             quizzes[1].question1 = [quizzes2[1].questions[0].text: quizzes2[1].questions[0].options]
@@ -186,20 +295,22 @@ class QuizRepository {
         
     }
     
+  
+    
     func createQuiz(name : String, question1: [String: [String]], question2: [String: [String]], question3: [String: [String]], correct1Index: Int, correct2Index: Int, correct3Index: Int) -> Quiz {
         
-        let quiz = Quiz()
+        let quiz = Quiz(name: name, desc: "", score: 0, question1: question1, question2: question2, question3: question3, correct1Index: correct1Index, correct2Index: correct2Index, correct3Index: correct3Index)
         
-        quiz.name = name
-        
-        quiz.question1 = question1
-        quiz.question2 = question2
-        quiz.question3 = question3
-        
-        
-        quiz.correct1Index = correct1Index
-        quiz.correct2Index = correct2Index
-        quiz.correct3Index = correct3Index
+//        quiz.name = name
+//        
+//        quiz.question1 = question1
+//        quiz.question2 = question2
+//        quiz.question3 = question3
+//        
+//        
+//        quiz.correct1Index = correct1Index
+//        quiz.correct2Index = correct2Index
+//        quiz.correct3Index = correct3Index
         
         quizzes.append(quiz)
         

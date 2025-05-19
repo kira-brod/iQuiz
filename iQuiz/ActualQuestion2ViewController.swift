@@ -10,8 +10,8 @@ import UIKit
 class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var tblTable: UITableView!
-    var repository : QuizRepository = QuizRepository()
-    var quiz = Quiz()
+    var repository : QuizRepository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+    var quiz = Quiz(name: "Marvel Super Heroes", desc: "hero quiz", score: 0, question1: ["What is the name of the green guy?" : ["Greenie", "Hulk", "Verde", "grass"]], question2: ["Who shoots webs?" : ["spider man", "iron man", "captain america", "Hulk"]], question3: ["What tool does Thor have?" : ["sword", "hammer", "screw driver", "wrench"]], correct1Index: 1, correct2Index: 0, correct3Index: 1)
     var change = false
     var urlString : String = ""
     
@@ -20,7 +20,7 @@ class ActualQuestion2ViewController: UIViewController, UITableViewDelegate {
     
     class DataTable : NSObject, UITableViewDataSource {
         var data : [String: [String]] = [:]
-        var quiz1 : Quiz = Quiz()
+        var quiz1 : Quiz = Quiz(name: "Marvel Super Heroes", desc: "hero quiz", score: 0, question1: ["What is the name of the green guy?" : ["Greenie", "Hulk", "Verde", "grass"]], question2: ["Who shoots webs?" : ["spider man", "iron man", "captain america", "Hulk"]], question3: ["What tool does Thor have?" : ["sword", "hammer", "screw driver", "wrench"]], correct1Index: 1, correct2Index: 0, correct3Index: 1)
         
         init(_ items : [String : [String]], quiz q : Quiz) {
             data = items
