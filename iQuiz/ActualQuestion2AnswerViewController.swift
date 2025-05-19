@@ -10,12 +10,14 @@ import UIKit
 class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate {
 
     var quiz = Quiz(name: "Marvel Super Heroes", desc: "hero quiz", score: 0, question1: ["What is the name of the green guy?" : ["Greenie", "Hulk", "Verde", "grass"]], question2: ["Who shoots webs?" : ["spider man", "iron man", "captain america", "Hulk"]], question3: ["What tool does Thor have?" : ["sword", "hammer", "screw driver", "wrench"]], correct1Index: 1, correct2Index: 0, correct3Index: 1)
-    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
     var correct = false
     var indexPick : Int = 0
     var score : Int = 0
     var change = false
     var urlString : String = ""
+    var saved : [Quiz1] = []
+
     
     @IBOutlet weak var tblTable: UITableView!
     
@@ -74,7 +76,7 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var repository = QuizRepository(change, urlString)
+        var repository = QuizRepository(change, urlString, saved)
         
         if correct {
             CheckAnswer.text = "Correct!"
@@ -130,6 +132,7 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
             controller?.score = score
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
 
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score) hiii")
         }
@@ -138,6 +141,7 @@ class ActualQuestion2AnswerViewController: UIViewController, UITableViewDelegate
             let controller = segue.destination as? ViewController
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
 
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 

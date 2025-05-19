@@ -49,7 +49,7 @@ public class DataLoader {
 //    }
 }
 
-var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
 
 
 class SettingsViewController: UIViewController {
@@ -87,6 +87,7 @@ class SettingsViewController: UIViewController {
       if url == nil {
         // TODO: Need a better error message
         NSLog("Bad address")
+          change = false
         return
       }
       // {{## END create-url ##}}
@@ -103,7 +104,7 @@ class SettingsViewController: UIViewController {
       // {{## END create-request ##}}
         
       change = true
-      repository = QuizRepository(change, self.addressField.text!)
+      repository = QuizRepository(change, self.addressField.text!, [])
       
       // Set up a spinner
       spinner.startAnimating()
@@ -192,6 +193,7 @@ class SettingsViewController: UIViewController {
             return
         }
         repository.quizzes2 = loadedQuizzes
+        quizzes = loadedQuizzes
         print(loadedQuizzes[0].desc)
         change = true
         reload = true

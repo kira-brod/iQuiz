@@ -15,8 +15,9 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
     var score = 0
     var change = false
     var quiz = Quiz(name: "Marvel Super Heroes", desc: "hero quiz", score: 0, question1: ["What is the name of the green guy?" : ["Greenie", "Hulk", "Verde", "grass"]], question2: ["Who shoots webs?" : ["spider man", "iron man", "captain america", "Hulk"]], question3: ["What tool does Thor have?" : ["sword", "hammer", "screw driver", "wrench"]], correct1Index: 1, correct2Index: 0, correct3Index: 1)
-    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
     var urlString : String = ""
+    var saved : [Quiz1] = []
     
     
     
@@ -114,7 +115,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
 //        tblTable.delegate = self
         
 //        quiz = repository.createQuiz(name: "Mathematics", question1: ["2 * 6?" : ["4", "8", "12"]], question2: ["4 + 12?" : ["16", "20", "24"]], question3: ["5 - 4?" : ["9", "1", "17"]], correct1Index: 2, correct2Index: 0, correct3Index: 1)
-        let repository : QuizRepository = QuizRepository(change, urlString)
+        let repository : QuizRepository = QuizRepository(change, urlString, saved)
 
         
         stringTableData1 = DataTable(repository.quizzes[indexPick].question1, quiz: repository.quizzes[indexPick])
@@ -148,6 +149,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
             controller?.score = score
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             
@@ -158,6 +160,8 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
             let controller = segue.destination as? ViewController
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
+
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             

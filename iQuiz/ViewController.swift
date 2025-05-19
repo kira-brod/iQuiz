@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     var indexPick : Int = 0
     var change = false
-    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
     var urlString : String = ""
     var reload = false
     var saved : [Quiz1] = []
@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         
         var names : [String] = []
         var detail : [String] = []
-        var repo = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+        var repo = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
         
 
         
@@ -130,7 +130,9 @@ class ViewController: UIViewController, UITableViewDelegate {
             tblTable.reloadData()
         }
         
-        var repository = QuizRepository(change, urlString)
+        var repository = QuizRepository(change, urlString, saved)
+        
+        
 
         
         var names = [repository.quizzes[0].name, repository.quizzes[1].name, repository.quizzes[2].name]
@@ -187,6 +189,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             controller?.repository = repository
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
             print("Preparing for segue - indexPick: \(indexPick)")
 
             

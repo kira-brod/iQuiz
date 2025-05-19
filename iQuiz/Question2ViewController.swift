@@ -14,8 +14,9 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
     var indexPick : Int = 0
     var score = 0
     var change = false
-    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json")
+    var repository = QuizRepository(false, "https://tednewardsandbox.site44.com/questions.json", [])
     var urlString : String = ""
+    var saved : [Quiz1] = []
     
     
     @IBOutlet weak var check: UIButton!
@@ -82,7 +83,7 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
         
         let data1 = DataLoader(urlString).quizzes[indexPick].questions
         
-        let repository = QuizRepository(change, urlString)
+        let repository = QuizRepository(change, urlString, saved)
 
 
         
@@ -127,6 +128,7 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
                 controller?.score = score
                 controller?.change = change
                 controller?.urlString = urlString
+                controller?.saved = saved
 
                 print("Preparing for segue - change: \(change) and score: \(score) hiii")
             }
@@ -135,6 +137,8 @@ class Question2ViewController: UIViewController, UITableViewDelegate {
             let controller = segue.destination as? ViewController
             controller?.change = change
             controller?.urlString = urlString
+            controller?.saved = saved
+
             print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
 
             

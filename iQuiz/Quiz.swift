@@ -219,12 +219,14 @@ class QuizRepository: NSObject, NSCoding {
     required convenience init?(coder decoder: NSCoder) {
         guard let data = decoder.decodeObject(forKey: "data") as? [QuizJSON],
               let load = decoder.decodeBool(forKey: "load") as? Bool,
-              let url = decoder.decodeObject(forKey: "url") as? String
+              let url = decoder.decodeObject(forKey: "url") as? String,
+              let saved = decoder.decodeObject(forKey: "saved") as? [Quiz1]
             else { return nil }
         
         self.init(
             load,
-            url
+            url,
+            saved
         )
     }
     
@@ -250,40 +252,79 @@ class QuizRepository: NSObject, NSCoding {
 //        self.data = DataLoader("https://tednewardsandbox.site44.com/questions.json").quizzes
 //    }
     
-    init (_ load : Bool, _ url : String ) {
+
+    
+    init (_ load : Bool, _ url : String, _ saved : [Quiz1] ) {
         
         self.url = url
         self.data = DataLoader(url).quizzes
         
         if load {
-            quizzes = [quiz1, quiz2, quiz3]
-            quizzes2 = parseQuizTopics(data)
             
-            quizzes[0].name = quizzes2[0].title
-            quizzes[1].name = quizzes2[1].title
-            quizzes[2].name = quizzes2[2].title
-        
-
-            
-            quizzes[0].desc = quizzes2[0].desc
-            quizzes[1].desc = quizzes2[1].desc
-            quizzes[2].desc = quizzes2[2].desc
-            
-            quizzes[0].question1 = [quizzes2[0].questions[0].text: quizzes2[0].questions[0].options]
-            quizzes[1].question1 = [quizzes2[1].questions[0].text: quizzes2[1].questions[0].options]
-            quizzes[2].question1 = [quizzes2[2].questions[0].text: quizzes2[2].questions[0].options]
-            
-            quizzes[0].correct1Index = quizzes2[0].questions[0].correctIndex
-            quizzes[1].correct1Index = quizzes2[1].questions[0].correctIndex
-            quizzes[2].correct1Index = quizzes2[2].questions[0].correctIndex
-            
-            quizzes[1].question2 = [quizzes2[1].questions[1].text: quizzes2[1].questions[1].options]
-            
-            quizzes[1].correct2Index = quizzes2[1].questions[1].correctIndex
-            
-            quizzes[1].question3 = [quizzes2[1].questions[2].text: quizzes2[1].questions[2].options]
-            
-            quizzes[1].correct3Index = quizzes2[1].questions[2].correctIndex
+            if saved.isEmpty {
+                
+                quizzes = [quiz1, quiz2, quiz3]
+                quizzes2 = parseQuizTopics(data)
+                
+                print("quizzes2: \(quizzes2)")
+                
+                quizzes[0].name = quizzes2[0].title
+                quizzes[1].name = quizzes2[1].title
+                quizzes[2].name = quizzes2[2].title
+                
+                
+                
+                quizzes[0].desc = quizzes2[0].desc
+                quizzes[1].desc = quizzes2[1].desc
+                quizzes[2].desc = quizzes2[2].desc
+                
+                quizzes[0].question1 = [quizzes2[0].questions[0].text: quizzes2[0].questions[0].options]
+                quizzes[1].question1 = [quizzes2[1].questions[0].text: quizzes2[1].questions[0].options]
+                quizzes[2].question1 = [quizzes2[2].questions[0].text: quizzes2[2].questions[0].options]
+                
+                quizzes[0].correct1Index = quizzes2[0].questions[0].correctIndex
+                quizzes[1].correct1Index = quizzes2[1].questions[0].correctIndex
+                quizzes[2].correct1Index = quizzes2[2].questions[0].correctIndex
+                
+                quizzes[1].question2 = [quizzes2[1].questions[1].text: quizzes2[1].questions[1].options]
+                
+                quizzes[1].correct2Index = quizzes2[1].questions[1].correctIndex
+                
+                quizzes[1].question3 = [quizzes2[1].questions[2].text: quizzes2[1].questions[2].options]
+                
+                quizzes[1].correct3Index = quizzes2[1].questions[2].correctIndex
+            } else {
+                quizzes = [quiz1, quiz2, quiz3]
+                quizzes2 = saved
+                
+                print("quizzes2: \(quizzes2)")
+                
+                quizzes[0].name = quizzes2[0].title
+                quizzes[1].name = quizzes2[1].title
+                quizzes[2].name = quizzes2[2].title
+                
+                
+                
+                quizzes[0].desc = quizzes2[0].desc
+                quizzes[1].desc = quizzes2[1].desc
+                quizzes[2].desc = quizzes2[2].desc
+                
+                quizzes[0].question1 = [quizzes2[0].questions[0].text: quizzes2[0].questions[0].options]
+                quizzes[1].question1 = [quizzes2[1].questions[0].text: quizzes2[1].questions[0].options]
+                quizzes[2].question1 = [quizzes2[2].questions[0].text: quizzes2[2].questions[0].options]
+                
+                quizzes[0].correct1Index = quizzes2[0].questions[0].correctIndex
+                quizzes[1].correct1Index = quizzes2[1].questions[0].correctIndex
+                quizzes[2].correct1Index = quizzes2[2].questions[0].correctIndex
+                
+                quizzes[1].question2 = [quizzes2[1].questions[1].text: quizzes2[1].questions[1].options]
+                
+                quizzes[1].correct2Index = quizzes2[1].questions[1].correctIndex
+                
+                quizzes[1].question3 = [quizzes2[1].questions[2].text: quizzes2[1].questions[2].options]
+                
+                quizzes[1].correct3Index = quizzes2[1].questions[2].correctIndex
+            }
         } else {
             quizzes = [quiz1, quiz2, quiz3]
         }
