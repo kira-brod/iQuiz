@@ -162,7 +162,7 @@ class Question1ViewController: UIViewController, UITableViewDelegate {
             controller?.urlString = urlString
             controller?.saved = saved
 
-            print("Preparing for segue - indexPick: \(indexPick) and score: \(score)")
+            print("Preparing for segue - change: \(change) and score: \(score)")
 
             
             

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://tednewardsandbox.site44.com/questions.json" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNR-Bs-p33">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNR-Bs-p33">
                                 <rect key="frame" x="16" y="171" width="371" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -53,16 +53,8 @@
                                 <rect key="frame" x="0.0" y="95" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Quiz" id="ZBr-ZY-YCM">
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" identifier="backHome" modalPresentationStyle="fullScreen" id="0n6-Ha-P2d"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Settings" id="IqM-Nk-uiE">
-                                        <connections>
-                                            <action selector="Settings:" destination="BYZ-38-t0r" id="Tue-3u-tTi"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem title="Quiz" id="ZBr-ZY-YCM"/>
+                                    <barButtonItem title="Settings" id="IqM-Nk-uiE"/>
                                 </items>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5b-Su-NCY">
@@ -120,10 +112,19 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Quiz" id="Fea-At-I7c"/>
-                                    <barButtonItem title="Settings" id="GEr-sH-dDa">
+                                    <barButtonItem title="Load" id="daj-6m-H8h">
                                         <connections>
-                                            <action selector="Settings:" destination="BYZ-38-t0r" id="hEY-ol-GZG"/>
-                                            <segue destination="Usy-eu-mAS" kind="presentation" identifier="settings" modalPresentationStyle="fullScreen" id="aN2-M3-LW7"/>
+                                            <action selector="Load:" destination="BYZ-38-t0r" id="02E-cT-TUM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Store" id="gIo-xW-CEd">
+                                        <connections>
+                                            <action selector="Store:" destination="BYZ-38-t0r" id="dfG-Yl-mjN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="App Settings" id="eDj-ES-UNO">
+                                        <connections>
+                                            <action selector="AppSettings:" destination="BYZ-38-t0r" id="Q4q-t2-aqO"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -639,7 +640,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PM4-6j-amL"/>
-        <segue reference="eiV-3R-iRG"/>
+        <segue reference="pou-iy-ZhT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="questionmark.circle.dashed" catalog="system" width="128" height="123"/>

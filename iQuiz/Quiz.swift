@@ -266,7 +266,7 @@ class QuizRepository: NSObject, NSCoding {
                 quizzes = [quiz1, quiz2, quiz3]
                 quizzes2 = parseQuizTopics(data)
                 
-                print("quizzes2: \(quizzes2)")
+//                print("quizzes2: \(quizzes2)")
                 
                 quizzes[0].name = quizzes2[0].title
                 quizzes[1].name = quizzes2[1].title
@@ -297,7 +297,7 @@ class QuizRepository: NSObject, NSCoding {
                 quizzes = [quiz1, quiz2, quiz3]
                 quizzes2 = saved
                 
-                print("quizzes2: \(quizzes2)")
+//                print("quizzes2: \(quizzes2)")
                 
                 quizzes[0].name = quizzes2[0].title
                 quizzes[1].name = quizzes2[1].title
@@ -329,9 +329,9 @@ class QuizRepository: NSObject, NSCoding {
             quizzes = [quiz1, quiz2, quiz3]
         }
         
-        print(quizzes[0].name)
-        print(quizzes[1].name)
-        print(quizzes[2].name)
+//        print(quizzes[0].name)
+//        print(quizzes[1].name)
+//        print(quizzes[2].name)
         
         
     }

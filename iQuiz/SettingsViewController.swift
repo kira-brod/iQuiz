@@ -158,6 +158,8 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        addressField.text = UserDefaults.standard.string(forKey: "name_preference")
         data = DataLoader(addressField.text!).quizzes
         repository.data = data
       
@@ -169,11 +171,12 @@ class SettingsViewController: UIViewController {
         print("Save pressed")
         NSKeyedArchiver.archiveRootObject(quizzes, toFile: file)
         
-        let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
+//        
+//        let string = "https://tednewardsandbox.site44.com/questions.json"
+//        
+//        defaults.set("\(self.addressField.text ?? string)", forKey: "name_preference")
         
-        let string = "https://tednewardsandbox.site44.com/questions.json"
-        
-        defaults.set("\(self.addressField.text ?? string)", forKey: "name_preference")
         
     }
     
@@ -197,6 +200,7 @@ class SettingsViewController: UIViewController {
         print(loadedQuizzes[0].desc)
         change = true
         reload = true
+        
     }
     
     
